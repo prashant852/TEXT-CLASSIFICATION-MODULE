@@ -1,0 +1,16 @@
+pandas
+numpy
+scikit-learn
+torch
+transformers
+wandb
+datasets
+sentencepiece
+accelerate
+tqdm
+kaggle
+seqeval
+spacy
+evaluate
+ftfy
+timm
