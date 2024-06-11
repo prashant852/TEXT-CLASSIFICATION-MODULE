@@ -76,7 +76,7 @@ def freeze_and_modify_weights(model, config):
                         module.bias.data.zero_()
                         module.weight.data.fill_(1.0)
     
-    if config.freeze_embeddings == 'True':
+    if config.sigma_reparam == 'True':
         print("CONVERTING MODEL TO SigamReparam VARIENT")
         model = remove_all_normalization_layers(convert_to_sn(model))
     
