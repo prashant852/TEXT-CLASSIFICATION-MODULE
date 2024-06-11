@@ -32,4 +32,4 @@ python train.py \
 --eval_delay 1000 \
 --eval_steps 100 \
 --report_to "wandb" \
---experiment "Pretrain-Experiment-1" 
+--experiment "Finetune-Experiment-1" 
