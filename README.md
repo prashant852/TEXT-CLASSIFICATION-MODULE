@@ -1,4 +1,4 @@
-# Text Classification module for training huggingface transformer based model  
+# Text classification training module
 
 Usage:  
 
