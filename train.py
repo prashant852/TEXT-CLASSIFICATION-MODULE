@@ -55,6 +55,7 @@ if __name__ == '__main__':
     #Modeling arguments
     parser.add_argument('--train_max_len', type=int, default=1792, help='Training maximum sequence length')
     parser.add_argument('--metric', type=str, default='qwk', help="Evaluation metric to use either from: 'accuracy' or 'qwk'")
+    parser.add_argument('--optimize_threshold', type=str, default='False', help="Set to True to optimize threshold for regression")
     
     parser.add_argument('--sigma_reparam', default='False', type=str, help="Convert model to SigamReparam variant")
     parser.add_argument('--external_data_strategy', default='None', type=str, help="Strategy to include external data: 'None', 'append', 'only-external'")
