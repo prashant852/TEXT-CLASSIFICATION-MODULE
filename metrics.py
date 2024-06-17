@@ -50,7 +50,7 @@ class OptunaRounder:
         try:
             opt_y_pred = self.adjust(self.y_pred, thresholds)
         except: return 0
-        return qwk3(self.y_true, opt_y_pred)
+        return cohen_kappa_score(self.y_true, opt_y_pred, weights='quadratic')
 
     def adjust(self, y_pred, thresholds):
         opt_y_pred = pd.cut(y_pred, [-np.inf] + thresholds + [np.inf], labels=self.labels)
