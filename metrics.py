@@ -3,35 +3,35 @@ import numpy as np
 from sklearn.metrics import cohen_kappa_score
 import optuna
 import pandas as pd
-from numba import jit 
+# from numba import jit 
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 optuna.logging.set_verbosity(optuna.logging.WARNING) 
 
-@jit
-def qwk3(a1, a2, max_rat=5):
-    assert(len(a1) == len(a2))
-    a1 = np.asarray(a1, dtype=int)
-    a2 = np.asarray(a2, dtype=int)
+# @jit
+# def qwk3(a1, a2, max_rat=5):
+#     assert(len(a1) == len(a2))
+#     a1 = np.asarray(a1, dtype=int)
+#     a2 = np.asarray(a2, dtype=int)
 
-    hist1 = np.zeros((max_rat + 1, ))
-    hist2 = np.zeros((max_rat + 1, ))
+#     hist1 = np.zeros((max_rat + 1, ))
+#     hist2 = np.zeros((max_rat + 1, ))
 
-    o = 0
-    for k in range(a1.shape[0]):
-        i, j = a1[k], a2[k]
-        hist1[i] += 1
-        hist2[j] += 1
-        o +=  (i - j) * (i - j)
+#     o = 0
+#     for k in range(a1.shape[0]):
+#         i, j = a1[k], a2[k]
+#         hist1[i] += 1
+#         hist2[j] += 1
+#         o +=  (i - j) * (i - j)
 
-    e = 0
-    for i in range(max_rat + 1):
-        for j in range(max_rat + 1):
-            e += hist1[i] * hist2[j] * (i - j) * (i - j)
+#     e = 0
+#     for i in range(max_rat + 1):
+#         for j in range(max_rat + 1):
+#             e += hist1[i] * hist2[j] * (i - j) * (i - j)
 
-    e = e / a1.shape[0]
+#     e = e / a1.shape[0]
 
-    return 1 - o / e
+#     return 1 - o / e
 
 
 class OptunaRounder:
@@ -94,7 +94,7 @@ def compute_metrics_qwk_for_regression_with_optuna(eval_pred):
     preds_opt = objective.adjust(predictions, best_thresholds)
     preds_opt = preds_opt.astype(int)
 
-    qwk = qwk3(labels, preds_opt)
+    qwk = cohen_kappa_score(labels, preds_opt, weights='quadratic')
     results = {
         'qwk': qwk,
         'threshold0' : best_thresholds[0],
